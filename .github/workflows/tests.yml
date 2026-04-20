@@ -11,7 +11,6 @@ on:
       - ready_for_review
     branches-ignore:
       - 'v[0-9]+.[0-9]+.[0-9]+-docs'
-  # Scheduled trigger on Monday at 2:47am UTC
   schedule:
     - cron: "47 2 * * 1"
   merge_group:
@@ -33,10 +32,7 @@ jobs:
     with:
       branch: ${{ github.ref }}
       use_large_runner: ${{ github.event_name == 'merge_group' }}
-
-      # Run a 'lightened' version of the CI on Pull Requests and Merge Queues by default
-      # Unless the label `ci:run-full-test-suite` is attached to the PR.
-      # Always runs the full suite for push events.
+      upload_to_codecov: false
       run_lightened_ci: >-
         ${{
           (github.event_name == 'pull_request'
@@ -56,14 +52,14 @@ jobs:
         uses: astral-sh/setup-uv@v7
         with:
           version: 0.9.17
-          enable-cache: true   
-          cache-suffix: ${{ github.job }}-${{ matrix.python-version }}          
-          
+          enable-cache: true
+          cache-suffix: ${{ github.job }}-${{ matrix.python-version }}
+
       - name: Update lock files
         run: |
           uv lock
 
-      - name: Upload frozen requirements 
+      - name: Upload frozen requirements
         uses: actions/upload-artifact@v6
         with:
           name: frozen-lockfile
