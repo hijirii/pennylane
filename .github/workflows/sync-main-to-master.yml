@@ -2,9 +2,6 @@
 name: Sync main to master
 
 on:
-  # Scheduled trigger every weekday at 2:47am UTC
-  schedule:
-  - cron:  '47 2 * * 1-5'
   workflow_dispatch:
 
 jobs:
