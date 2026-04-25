@@ -1,9 +1,6 @@
 name: Build nightly PennyLane releases for TestPyPI
 
 on:
-  schedule:
-    # Run Tuesday-Saturday at 01:00 EDT (cron is in UTC)
-    - cron: "0 5 * * 2-6"
   workflow_dispatch:
 
 env:
@@ -64,3 +61,4 @@ jobs:
       with:
         repository-url: https://test.pypi.org/legacy/
         packages-dir: dist
+

@@ -22,7 +22,8 @@ jobs:
       branch: ${{ github.ref }}
       python_warning_level: 'error'
       run_lightened_ci: false
-      pytest_additional_args: '--benchmark-disable'
+      pytest_additional_args: ''
+      upload_to_codecov: false
       skip_ci_test_jobs: |
         all-interfaces-tests
         external-libraries-tests
